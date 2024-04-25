@@ -1,0 +1,66 @@
+#Utilizar una función para almacenar la información y otra función para mostrar la información.
+#Utilizar un diccionario para almacenar dicha información, con el par usuario-contraseña (clave-valor).
+#Utilizar otra función para el login de usuarios, comprobando que la contraseña coincida con el usuario.
+
+import os
+
+usuarios = {"Priscila": "1234"}
+
+def cls():
+     os.system('CLS')
+
+cls() #Este clear se utiliza para limpiar la consola al inicio de la ejecución#
+def Registro():
+    nombre_usuario = input("Por favor, ingrese un nombre de usuario: ")
+    while nombre_usuario in usuarios:
+        cls()
+        print("El nombre de usuario ya está en uso. Por favor, ingrese otro.")
+        nombre_usuario = input("Por favor, ingrese un nombre de usuario: ")
+    password = input("Ingrese una contraseña: ")
+    usuarios[nombre_usuario] = password
+    print("\n¡Se ha registrado con éxito! \n")
+
+def Iniciar_Sesion(nombre_usuario, password):
+    while nombre_usuario not in usuarios or usuarios[nombre_usuario] != password:
+        print("Usuario o contraseña incorrecto, por favor ingrese nuevamente sus datos")
+        nombre_usuario = input("Ingrese nombre de usuario: ")
+        password = input("Ingrese su contraseña: ")
+    cls()
+    print("¡Bienvenido!")
+    return True
+
+def Ver_Usuarios():
+    cls()
+    print(usuarios)
+    print("\n")
+
+def Inicio():
+    opcion = 0
+    while opcion != 4:
+        print("1. Iniciar sesión")
+        print("2. Registrarme")
+        print("3. Ver usuarios")
+        print("4. Salir \n")
+        opcion = int(input("Elija una opción: "))
+        if opcion == 1:
+            cls()
+            nombre_usuario = input("Ingrese su nombre de usuario: ")
+            password = input("Ingrese su contraseña: ")
+            logueado = Iniciar_Sesion(nombre_usuario, password)
+            if not logueado:
+                print("Usuario o contraseña incorrectas, intente nuevamente")
+            else:
+                print("Has iniciado sesión \n")
+                break
+        elif opcion == 2:
+            cls()
+            Registro()
+        elif opcion == 3:
+            cls()
+            Ver_Usuarios()
+        elif opcion == 4:
+            cls()
+            print("¡Hasta luego! \n")
+            break
+
+Inicio()
